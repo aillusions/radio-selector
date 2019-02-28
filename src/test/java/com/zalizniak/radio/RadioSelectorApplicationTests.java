@@ -30,7 +30,7 @@ public class RadioSelectorApplicationTests {
     public void contextLoads() throws IOException, InterruptedException {
 
         String basic = "/search/";
-        run(basic, "russian");
+        run(basic, "ukraine");
 
         //for (int i = 2; i <= 73; i++) {
         //    Thread.sleep(1000);
