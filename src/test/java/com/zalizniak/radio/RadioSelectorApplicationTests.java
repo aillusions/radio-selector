@@ -29,16 +29,16 @@ public class RadioSelectorApplicationTests {
     @Test
     public void contextLoads() throws IOException, InterruptedException {
 
-        String basic = "/stations/country/";
-        run(basic);
+        String basic = "/search/";
+        run(basic, "russian");
 
-        for (int i = 2; i <= 18; i++) {
-            Thread.sleep(1000);
-            run(basic + "page" + i);
-        }
+        //for (int i = 2; i <= 73; i++) {
+        //    Thread.sleep(1000);
+        //    run(basic + "page" + i);
+        //}
     }
 
-    public void run(String uri) throws IOException {
+    public void run(String uri, String query) throws IOException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -47,11 +47,13 @@ public class RadioSelectorApplicationTests {
         httpMessageConverter.add(stringHttpMessageConverter);
         restTemplate.setMessageConverters(httpMessageConverter);
 
-        URI targetUrl = UriComponentsBuilder.fromUriString("https://www.internet-radio.com")
-                .path(uri)
-                //.queryParam("q", "...")
-                .build()
-                .toUri();
+        UriComponentsBuilder urlBuilder = UriComponentsBuilder.fromUriString("https://www.internet-radio.com").path(uri);
+
+        if (StringUtils.isNotBlank(query)) {
+            urlBuilder.queryParam("radio", query);
+        }
+
+        URI targetUrl = urlBuilder.build().toUri();
 
         HttpHeaders headers = new HttpHeaders();
         Charset utf8 = Charset.forName("UTF-8");
