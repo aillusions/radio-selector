@@ -61,42 +61,32 @@ function Z_WS(wsEndpointUri) {
     }
 }
 
-var player;
+var PLAYER_INSTANCE;
 var playRequestedButNotYetPlaying = 0;
-var lastUrl = null;
 
 function playAudio(url) {
 
     var now = Date.now();
 
-    if (url === lastUrl) {
-        console.info("url === lastUrl");
-        return;
-    }
-
-    lastUrl = url;
-
     if (playRequestedButNotYetPlaying
-        && ((now - playRequestedButNotYetPlaying) < 200)) {
+        && ((now - playRequestedButNotYetPlaying) < 10)) {
         console.info("playRequestedButNotYetPlaying");
         return;
     }
 
-    if (!player) {
-        player = document.getElementById('audioPlayerId');
+    if (!PLAYER_INSTANCE) {
+        PLAYER_INSTANCE = document.getElementById('audioPlayerId');
+        PLAYER_INSTANCE.volume = 0.3;
     }
 
-    player.src = url;
-    player.volume = 0.8;
+    PLAYER_INSTANCE.src = url;
 
     playRequestedButNotYetPlaying = now;
 
-    var promise = player.play();
+    var promise = PLAYER_INSTANCE.play();
     promise.then(function () {
         console.info('playing..');
-        setTimeout(function () {
-            playRequestedButNotYetPlaying = 0;
-        }, 50);
+        playRequestedButNotYetPlaying = 0;
     }, function (reason) {
         console.error(reason);
     })
