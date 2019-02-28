@@ -5,7 +5,7 @@
 var zws = new Z_WS('/ws/drawing');
 
 
-var numberOfItems = 1260;
+var numberOfItems = 1268;
 var FIELD_CONTAINER = null;
 var SELECTED_ITEM = null;
 var previousItemOver = null;
@@ -15,16 +15,16 @@ $(function () {
     var FIELD_CONTAINER = $('#field_container');
     console.log("ready!");
     for (var i = 0; i < numberOfItems; i++) {
-        FIELD_CONTAINER.append("<div class='selector_item' id='selector_item_" + i + "'></div>");
+        FIELD_CONTAINER.append("<div class='selector_item' id='selector_item_" + i + "'>" + i + "</div>");
     }
 
-    $(".selector_item").on('mouseover', function (evt) {
+    /*$(".selector_item").on('mouseover', function (evt) {
         if (SELECTED_ITEM != null) {
             return;
         }
 
         if (previousItemOver) {
-            unHighlightElement();
+            unHighlightElement(previousItemOver);
         }
 
         var thisItem = $(this);
@@ -33,7 +33,7 @@ $(function () {
         highlightElement(thisItem);
 
         playForElement(thisItem);
-    });
+    });*/
 
     function playForElement(elem) {
         var idx = elem.attr('id').substring(14);
@@ -47,10 +47,13 @@ $(function () {
 
         if (SELECTED_ITEM == null) {
             selectElement(thisElement);
+            playForElement(thisElement);
         } else if (SELECTED_ITEM.attr('id') === thisElement.attr('id')) {
-            deSelectElement()
-        } else {
             deSelectElement();
+        } else {
+            var prevSelected = SELECTED_ITEM;
+            deSelectElement();
+            unHighlightElement(prevSelected);
             selectElement(thisElement);
             playForElement(thisElement);
         }
@@ -60,8 +63,8 @@ $(function () {
         elem.css('background-color', 'orange');
     }
 
-    function unHighlightElement() {
-        previousItemOver.css('background-color', 'gray');
+    function unHighlightElement(elem) {
+        elem.css('background-color', 'gray');
     }
 
     function selectElement(elem) {
