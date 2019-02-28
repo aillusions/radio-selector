@@ -1,6 +1,6 @@
 <html>
 <style>
-    #dragable_zoomable {
+    #draggable_zoomable {
         cursor: move;
         position: relative;
         height: 700px;
@@ -20,45 +20,45 @@
 
 
 <body>
-<div id="dragable_zoomable"></div>
+<div id="draggable_zoomable"></div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
-    var img_ele = null;
+    var draggableZoomable = null;
 
-    function zoom(zoomincrement) {
-        img_ele = document.getElementById('dragable_zoomable');
-        var pre_width = img_ele.getBoundingClientRect().width,
-            pre_height = img_ele.getBoundingClientRect().height;
-        img_ele.style.width = (pre_width * zoomincrement) + 'px';
-        img_ele.style.height = (pre_height * zoomincrement) + 'px';
-        img_ele = null;
+    function zoom(zoomIncrement) {
+        draggableZoomable = document.getElementById('draggable_zoomable');
+        var pre_width = draggableZoomable.getBoundingClientRect().width,
+            pre_height = draggableZoomable.getBoundingClientRect().height;
+        draggableZoomable.style.width = (pre_width * zoomIncrement) + 'px';
+        draggableZoomable.style.height = (pre_height * zoomIncrement) + 'px';
+        draggableZoomable = null;
     }
 
     function start_drag() {
-        img_ele = this;
-        x_img_ele = window.event.clientX - document.getElementById('dragable_zoomable').offsetLeft;
-        y_img_ele = window.event.clientY - document.getElementById('dragable_zoomable').offsetTop;
+        draggableZoomable = this;
+        x_img_ele = window.event.clientX - document.getElementById('draggable_zoomable').offsetLeft;
+        y_img_ele = window.event.clientY - document.getElementById('draggable_zoomable').offsetTop;
         console.log("start drag");
     }
 
     function stop_drag() {
-        img_ele = null;
+        draggableZoomable = null;
         console.log("stop drag");
     }
 
     function while_drag() {
         var x_cursor = window.event.clientX;
         var y_cursor = window.event.clientY;
-        if (img_ele !== null) {
-            img_ele.style.left = (x_cursor - x_img_ele) + 'px';
-            img_ele.style.top = (window.event.clientY - y_img_ele) + 'px';
-            //console.log('dragging > img_left:' + img_ele.style.left+' | img_top: '+img_ele.style.top);
+        if (draggableZoomable !== null) {
+            draggableZoomable.style.left = (x_cursor - x_img_ele) + 'px';
+            draggableZoomable.style.top = (window.event.clientY - y_img_ele) + 'px';
+            //console.log('dragging > img_left:' + draggableZoomable.style.left+' | img_top: '+draggableZoomable.style.top);
         }
     }
 
-    document.getElementById('dragable_zoomable').addEventListener('mousedown', start_drag);
+    document.getElementById('draggable_zoomable').addEventListener('mousedown', start_drag);
     document.body.addEventListener('mousemove', while_drag);
     document.body.addEventListener('mouseup', stop_drag);
 
