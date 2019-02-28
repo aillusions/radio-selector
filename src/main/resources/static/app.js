@@ -39,7 +39,7 @@ $(function () {
         //console.log("SELECTED_NUM: " + SELECTED_NUM + " of " + FIELD_SQUARE);
     });
 
-    /*
+
     FIELD_CONTAINER.mouseup(function (event) {
         switch (event.which) {
             case 1:
@@ -59,7 +59,7 @@ $(function () {
         }
 
         return false;
-    });*/
+    });
 });
 
 function renderPoint(x, y) {

@@ -63,10 +63,19 @@ function Z_WS(wsEndpointUri) {
 
 var player;
 var playRequestedButNotYetPlaying = false;
+var lastUrl = null;
 
 function playAudio(url) {
 
+    if (url === lastUrl) {
+        console.info("url === lastUrl");
+        return;
+    }
+
+    lastUrl = url;
+
     if (playRequestedButNotYetPlaying) {
+        console.info("playRequestedButNotYetPlaying");
         return;
     }
 
@@ -83,7 +92,7 @@ function playAudio(url) {
         console.info('playing..');
         setTimeout(function () {
             playRequestedButNotYetPlaying = false;
-        }, 200);
+        }, 50);
     }, function (reason) {
         console.error(reason);
     })
