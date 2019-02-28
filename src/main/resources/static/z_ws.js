@@ -62,10 +62,12 @@ function Z_WS(wsEndpointUri) {
 }
 
 var player;
-var playRequestedButNotYetPlaying = false;
+var playRequestedButNotYetPlaying = 0;
 var lastUrl = null;
 
 function playAudio(url) {
+
+    var now = Date.now();
 
     if (url === lastUrl) {
         console.info("url === lastUrl");
@@ -74,7 +76,8 @@ function playAudio(url) {
 
     lastUrl = url;
 
-    if (playRequestedButNotYetPlaying) {
+    if (playRequestedButNotYetPlaying
+        && ((now - playRequestedButNotYetPlaying) < 200)) {
         console.info("playRequestedButNotYetPlaying");
         return;
     }
@@ -86,12 +89,13 @@ function playAudio(url) {
     player.src = url;
     player.volume = 0.8;
 
-    playRequestedButNotYetPlaying = true;
+    playRequestedButNotYetPlaying = now;
+
     var promise = player.play();
     promise.then(function () {
         console.info('playing..');
         setTimeout(function () {
-            playRequestedButNotYetPlaying = false;
+            playRequestedButNotYetPlaying = 0;
         }, 50);
     }, function (reason) {
         console.error(reason);
