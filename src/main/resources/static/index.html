@@ -3,8 +3,9 @@
     body {margin:0px; background-color:#000000b3}
     .selected {width: 1px; height: 1px; background-color: darkred; position: absolute;}
     .center {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-    .scheet {background-color: antiquewhite; cursor: pointer;}
-    .selector {height:300px; width:1000px}
+    .scheet { cursor:pointer;}
+    .selector {height:375px; width:1000px}
+    .selector_item {height:60px; width:60px; background-color: antiquewhite; border: solid #000; border-width: thin thin; display:inline-block;}
     audio {height: 25px;}
 </style>
 
@@ -15,10 +16,11 @@
 <script src="/app.js"></script>
 <body>
 <div id="field_container" oncontextmenu="return false;" class="center scheet selector">
+
 </div>
 <div>
    <audio id="audioPlayerId" class="center"
-          src="http://online-radioroks.tavrmedia.ua/RadioROKS_Live"
+          src=""
           autobuffer controls autoplay loop>
    </audio>
 </div>
