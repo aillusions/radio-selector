@@ -16,11 +16,16 @@
         background: gray;
     }
 
+    .selector_item {height:5%; width:5%; background-color: antiquewhite; border-left: solid #7e7e7e 1px; border-bottom: solid #7e7e7e thin; display:inline-block; text-align: center; font-size:2pt; color:red}
+
 </style>
 
 
 <body>
-<div id="draggable_zoomable"></div>
+<div id="draggable_zoomable">
+    <div class="selector_item"></div>
+
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -67,11 +72,11 @@
 
         if (event.originalEvent.deltaY < 0) {
             console.info("wheeled up");
-            zoom(1.5);
+            zoom(1.1);
         }
         else {
             console.info("wheeled down");
-            zoom(0.5);
+            zoom(0.9);
         }
     });
 
