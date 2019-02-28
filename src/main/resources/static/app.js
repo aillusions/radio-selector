@@ -32,10 +32,14 @@ $(function () {
 
         highlightElement(thisItem);
 
-        var idx = thisItem.attr('id').substring(14);
+        playForElement(thisItem);
+    });
+
+    function playForElement(elem) {
+        var idx = elem.attr('id').substring(14);
         console.log("idx:" + idx);
         zws.sendMessage(idx, 0);
-    });
+    }
 
     $(".selector_item").on('click', function (evt) {
 
@@ -45,6 +49,10 @@ $(function () {
             selectElement(thisElement);
         } else if (SELECTED_ITEM.attr('id') === thisElement.attr('id')) {
             deSelectElement()
+        } else {
+            deSelectElement();
+            selectElement(thisElement);
+            playForElement(thisElement);
         }
     });
 
