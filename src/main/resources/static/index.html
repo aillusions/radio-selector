@@ -4,8 +4,8 @@
     .selected {width: 1px; height: 1px; background-color: darkred; position: absolute;}
     .center {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
     .scheet { cursor:pointer;}
-    .selector {height:375px; width:1000px}
-    .selector_item {height:60px; width:60px; background-color: antiquewhite; border: solid #000; border-width: thin thin; display:inline-block;}
+    .selector {height:800px; width:1200px}
+    .selector_item {height:25px; width:25px; background-color: antiquewhite; border: solid #000; border-width: thin thin; display:inline-block;}
     audio {height: 25px;}
 </style>
 
@@ -15,14 +15,16 @@
 <script src="/z_ws.js"></script>
 <script src="/app.js"></script>
 <body>
-<div id="field_container" oncontextmenu="return false;" class="center scheet selector">
 
-</div>
-<div>
-   <audio id="audioPlayerId" class="center"
+<div id="field_container" oncontextmenu="return false;" class="center scheet selector">
+   <audio id="audioPlayerId"
           src=""
           autobuffer controls autoplay loop>
    </audio>
+   <br />
+</div>
+<div>
+
 </div>
 </body>
 </html>

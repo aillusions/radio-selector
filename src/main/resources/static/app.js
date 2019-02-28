@@ -5,7 +5,7 @@
 var zws = new Z_WS('/ws/drawing');
 
 
-var numberOfItems = 96;
+var numberOfItems = 1260;
 var FIELD_CONTAINER = null;
 var SELECTED_ITEM = null;
 var previousItemOver = null;
@@ -24,13 +24,14 @@ $(function () {
         }
 
         if (previousItemOver) {
-            previousItemOver.css('background-color', 'gray');
+            unHighlightElement();
         }
 
         var thisItem = $(this);
         previousItemOver = thisItem;
 
-        previousItemOver.css('background-color', 'orange');
+        highlightElement(thisItem);
+
         var idx = thisItem.attr('id').substring(14);
         console.log("idx:" + idx);
         zws.sendMessage(idx, 0);
@@ -41,14 +42,29 @@ $(function () {
         var thisElement = $(this);
 
         if (SELECTED_ITEM == null) {
-            SELECTED_ITEM = thisElement;
-            SELECTED_ITEM.css('background-color', 'red');
+            selectElement(thisElement);
         } else if (SELECTED_ITEM.attr('id') === thisElement.attr('id')) {
-            SELECTED_ITEM.css('background-color', 'orange');
-            SELECTED_ITEM = null;
+            deSelectElement()
         }
-
     });
+
+    function highlightElement(elem) {
+        elem.css('background-color', 'orange');
+    }
+
+    function unHighlightElement() {
+        previousItemOver.css('background-color', 'gray');
+    }
+
+    function selectElement(elem) {
+        SELECTED_ITEM = elem;
+        SELECTED_ITEM.css('background-color', 'red');
+    }
+
+    function deSelectElement() {
+        SELECTED_ITEM.css('background-color', 'orange');
+        SELECTED_ITEM = null;
+    }
 
 });
 
