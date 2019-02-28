@@ -27,16 +27,13 @@ $(function () {
             previousItemOver.css('background-color', 'gray');
         }
 
-        previousItemOver = $(this);
+        var thisItem = $(this);
+        previousItemOver = thisItem;
 
-        $(this).css('background-color', 'orange');
-
-        var x = evt.pageX - FIELD_CONTAINER.offset().left;
-        var y = evt.pageY - FIELD_CONTAINER.offset().top;
-
-        console.log("x:" + Math.round(x) + " y:" + Math.round(y));
-
-        zws.sendMessage(Math.round(x), Math.round(y));
+        previousItemOver.css('background-color', 'orange');
+        var idx = thisItem.attr('id').substring(14);
+        console.log("idx:" + idx);
+        zws.sendMessage(idx, 0);
     });
 
     $(".selector_item").on('click', function (evt) {
