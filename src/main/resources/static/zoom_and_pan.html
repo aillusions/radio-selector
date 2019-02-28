@@ -1,12 +1,12 @@
 <html>
 <style>
-    #draggable_zoomable { cursor: move; position: relative; height: 700px; width: 700px;top: 50%; transform: translate(-50%, -50%); left: 50%;  background-color: black; }
+    #field_container { cursor: move; position: relative; height: 700px; width: 700px;top: 50%; transform: translate(-50%, -50%); left: 50%;  background-color: black; }
     body {overflow: hidden; background: gray;}
     .selector_item {height:5%; width:5%; background-color: antiquewhite; border-left: solid #7e7e7e 1px; border-bottom: solid #7e7e7e thin; display:inline-block; text-align: center; font-size:2pt; color:red}
 </style>
 
 <body>
-<div id="draggable_zoomable">
+<div id="field_container">
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -15,7 +15,7 @@
     var draggableZoomable = null;
 
     function zoom(zoomIncrement) {
-        draggableZoomable = document.getElementById('draggable_zoomable');
+        draggableZoomable = document.getElementById('field_container');
         var pre_width = draggableZoomable.getBoundingClientRect().width,
             pre_height = draggableZoomable.getBoundingClientRect().height;
         draggableZoomable.style.width = (pre_width * zoomIncrement) + 'px';
@@ -25,8 +25,8 @@
 
     function start_drag() {
         draggableZoomable = this;
-        x_img_ele = window.event.clientX - document.getElementById('draggable_zoomable').offsetLeft;
-        y_img_ele = window.event.clientY - document.getElementById('draggable_zoomable').offsetTop;
+        x_img_ele = window.event.clientX - document.getElementById('field_container').offsetLeft;
+        y_img_ele = window.event.clientY - document.getElementById('field_container').offsetTop;
         console.log("start drag");
     }
 
@@ -45,7 +45,7 @@
         }
     }
 
-    document.getElementById('draggable_zoomable').addEventListener('mousedown', start_drag);
+    document.getElementById('field_container').addEventListener('mousedown', start_drag);
     document.body.addEventListener('mousemove', while_drag);
     document.body.addEventListener('mouseup', stop_drag);
 
