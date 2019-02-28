@@ -28,9 +28,13 @@ public class RadioSelectorApplicationTests {
 
     @Test
     public void contextLoads() throws IOException, InterruptedException {
-        for (int i = 4; i <= 25; i++) {
+
+        String basic = "/stations/country";
+        run("basic");
+
+        for (int i = 2; i <= 18; i++) {
             Thread.sleep(1000);
-            run("/stations/dance/page" + i);
+            run(basic + "/page" + i);
         }
     }
 
