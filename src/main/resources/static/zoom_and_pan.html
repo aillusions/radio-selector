@@ -1,0 +1,82 @@
+<html>
+<style>
+    #dragable_zoomable {
+        cursor: move;
+        position: relative;
+        height: 700px;
+        width: 700px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        background-color: black;
+    }
+
+    body {
+        overflow: hidden;
+        background: gray;
+    }
+
+</style>
+
+
+<body>
+<div id="dragable_zoomable"></div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+    var img_ele = null;
+
+    function zoom(zoomincrement) {
+        img_ele = document.getElementById('dragable_zoomable');
+        var pre_width = img_ele.getBoundingClientRect().width,
+            pre_height = img_ele.getBoundingClientRect().height;
+        img_ele.style.width = (pre_width * zoomincrement) + 'px';
+        img_ele.style.height = (pre_height * zoomincrement) + 'px';
+        img_ele = null;
+    }
+
+    function start_drag() {
+        img_ele = this;
+        x_img_ele = window.event.clientX - document.getElementById('dragable_zoomable').offsetLeft;
+        y_img_ele = window.event.clientY - document.getElementById('dragable_zoomable').offsetTop;
+        console.log("start drag");
+    }
+
+    function stop_drag() {
+        img_ele = null;
+        console.log("stop drag");
+    }
+
+    function while_drag() {
+        var x_cursor = window.event.clientX;
+        var y_cursor = window.event.clientY;
+        if (img_ele !== null) {
+            img_ele.style.left = (x_cursor - x_img_ele) + 'px';
+            img_ele.style.top = (window.event.clientY - y_img_ele) + 'px';
+            //console.log('dragging > img_left:' + img_ele.style.left+' | img_top: '+img_ele.style.top);
+        }
+    }
+
+    document.getElementById('dragable_zoomable').addEventListener('mousedown', start_drag);
+    document.body.addEventListener('mousemove', while_drag);
+    document.body.addEventListener('mouseup', stop_drag);
+
+
+    $(window).on('wheel', function (event) {
+
+        if (event.originalEvent.deltaY < 0) {
+            console.info("wheeled up");
+            zoom(1.5);
+        }
+        else {
+            console.info("wheeled down");
+            zoom(0.5);
+        }
+    });
+
+
+</script>
+</div>
+</body>
+</html>
