@@ -1,65 +1,56 @@
 /**
  *
  */
-function RadioSelector(RADIO_PUB_SUB) {
-    var selectedIdx = null;
-    var selectedItem = null;
+function RadioSelector(radioPubSub, itemsNum) {
+    var srv = this;
 
-    function playForIndex(idx) {
-        console.log("idx:" + idx);
-        RADIO_WEBSOCK.sendMessage(idx);
-    }
-
-    function playForElement(elem) {
-        var idx = elem.attr('id').substring(14);
-        playForIndex(idx);
-    }
-
-    function highlightElement(elem) {
-        elem.css('background-color', 'orange');
-    }
-
-    function unHighlightElement(elem) {
-        elem.css('background-color', 'gray');
-    }
-
-    function selectElement(elem) {
-        selectedItem = elem;
-        selectedItem.css('background-color', 'green');
-    }
-
-    function deSelectElement() {
-        selectedItem = null;
-    }
-
-    function pauseSelectElement() {
-        selectedItem.css('background-color', 'orange');
-    }
-
-    this.onUiBuilt = function () {
-        if (selectedIdx) {
-            this.selectorItemHandler(selectedIdx);
-        }
+    srv.stationStatuses = {
+        INITIAL: "INITIAL",
+        PLAYING: "PLAYING",
+        PAUSED: "PAUSED",
+        VISITED: "VISITED"
     };
 
-    this.selectorItemHandler = function (idx) {
+    srv.availableItems = [];
+    srv.selectedIdx = null;
 
-        selectedIdx = idx;
+    srv.getSelectedStation = function () {
+        return srv.availableItems[srv.selectedIdx];
+    };
 
-        var thisElement = $("#selector_item_" + idx);
-        if (!thisElement.length) {
+    srv.getSelectedIdx = function () {
+        return srv.selectedIdx;
+    };
+
+    srv.setPausedNumber = function (num) {
+        var idx = num - 1;
+        srv.availableItems[idx].stationStatus = srv.stationStatuses.PAUSED;
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, [idx]);
+    };
+
+    srv.setSelectedNumber = function (num) {
+
+        if (num < 0) {
+            srv.setPausedNumber(-num);
             return
         }
 
-        if (selectedItem == null) {
-            selectElement(thisElement);
-            playForElement(thisElement);
-        } else {
-            var prevSelected = selectedItem;
-            deSelectElement();
-            unHighlightElement(prevSelected);
-            selectElement(thisElement);
-            playForElement(thisElement);
+        var previousIdx = srv.selectedIdx;
+        var idx = num - 1;
+
+        if (previousIdx != null) {
+            srv.availableItems[previousIdx].stationStatus = srv.stationStatuses.VISITED;
         }
+        srv.selectedIdx = idx;
+        srv.availableItems[idx].stationStatus = srv.stationStatuses.PLAYING;
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, [idx]);
     };
+
+    for (let i = 0; i < itemsNum; i++) {
+        srv.availableItems.push({
+            stationIndex: i,
+            stationNumber: i + 1,
+            stationStatus: srv.stationStatuses.INITIAL
+        })
+    }
 }

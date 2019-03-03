@@ -6,7 +6,7 @@ describe('RadioSelectorTest', function () {
 
         var radioPubSub = new RadioPubSub();
 
-        var radioSelector = new RadioSelector(radioPubSub);
+        var radioSelector = new RadioSelector(radioPubSub, 10);
 
         expect(radioSelector.getSelectedIdx()).toBe(null);
 
@@ -15,11 +15,11 @@ describe('RadioSelectorTest', function () {
             selectedIdxs.push(idx);
         });
 
-        radioSelector.setSelectedIdx(1);
-        expect(radioSelector.getSelectedIdx()).toBe(1);
+        radioSelector.setSelectedNumber(1);
+        expect(radioSelector.getSelectedIdx()).toBe(0);
 
-        radioSelector.setSelectedIdx(2);
-        expect(radioSelector.getSelectedIdx()).toBe(2);
+        radioSelector.setSelectedNumber(2);
+        expect(radioSelector.getSelectedIdx()).toBe(1);
 
         expect(selectedIdxs.length).toBe(2);
 

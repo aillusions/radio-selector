@@ -10,6 +10,7 @@ function RadioPubSub() {
     };
 
     srv.pubSubEvents = {
-        EVT_RADIO_SELECTED: "EVT_RADIO_SELECTED"
+        EVT_RADIO_SELECTED: "EVT_RADIO_SELECTED",
+        EVT_RADIO_PAUSED: "EVT_RADIO_PAUSED"
     }
 }

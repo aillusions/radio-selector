@@ -1,16 +1,25 @@
 /**
  *
  */
-function RadioPlayer() {
+function RadioPlayer(radioPubSub) {
+    var srv = this;
 
     var playerInstance;
     var playRequestedButNotYetPlaying = 0;
 
-    this.pauseAudio = function () {
+    radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
+        RADIO_WEBSOCK.sendMessage(idx);
+    });
+
+    radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, function () {
+        srv.pauseAudio();
+    });
+
+    srv.pauseAudio = function () {
         playerInstance.pause();
     };
 
-    this.playAudio = function (url) {
+    srv.playAudio = function (url) {
 
         var now = Date.now();
 
