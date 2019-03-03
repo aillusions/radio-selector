@@ -1,9 +1,6 @@
 /**
  *
  */
-
-var RADIO_SELECTOR = new RadioSelector();
-
 function RadioSelector() {
     var selectedIdx = null;
     var selectedItem = null;
@@ -17,7 +14,6 @@ function RadioSelector() {
         var idx = elem.attr('id').substring(14);
         playForIndex(idx);
     }
-
 
     function highlightElement(elem) {
         elem.css('background-color', 'orange');
