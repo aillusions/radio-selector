@@ -24,8 +24,8 @@ module.exports = function (config) {
             BASE_JS_PATH + "/js/radio-pub-sub.js",
             BASE_JS_PATH + "/js/radio-selector2.js",
 
-            "DemoTest.js",
-            "RadioSelectorTest.js"
+            "tests/DemoTest.js",
+            "tests/RadioSelectorTest.js"
         ],
 
 
