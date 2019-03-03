@@ -9,13 +9,31 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
         vm.availableStations = RADIO_SELECTOR.availableItems;
 
         $scope.$on("$locationChangeSuccess", function ($event, next, current) {
-            var search = $location.search();
-            var num = search['num'];
-            console.info("num:" + num);
-            if(num) {
+            var num = getCurrentNum();
+            if (num) {
                 RADIO_SELECTOR.setSelectedNumber(parseInt(num));
             }
         });
+
+        vm.onToggleCrawl = function () {
+            $interval(function () {
+                navigateToNum(getCurrentNum() + 1)
+            }, 3000);
+        };
+
+        function navigateToNum(num) {
+            $location.search({"num": num})
+        }
+
+        function getCurrentNum() {
+            var search = $location.search();
+            var num = search['num'];
+            console.info("num:" + num);
+            if (num) {
+                return parseInt(num);
+            }
+            return null;
+        }
 
     }]);
 

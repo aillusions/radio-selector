@@ -64,6 +64,7 @@
               src=""
               autobuffer controls autoplay loop>
        </audio>
+        <button ng-click="rCtrl.onToggleCrawl()">crawl</button>
        <br />
        <a ng-repeat="rStation in rCtrl.availableStations"
           ng-href="{{rStation.stationStatus=='PLAYING' ? ('#!?num=-'+rStation.stationNumber) : ('#!?num=' + rStation.stationNumber)}}"
