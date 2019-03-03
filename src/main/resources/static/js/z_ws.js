@@ -39,10 +39,17 @@ function Z_WS(wsEndpointUri) {
         console.log("Disconnected");
     }
 
-    function sendMessage(x, y) {
+    function sendMessage(x) {
+        if (!stompClient.connected) {
+            setTimeout(function () {
+                sendMessage(x)
+            }, 50);
+            return;
+        }
+
         var message = {
             x: x,
-            y: y
+            y: 0
         };
         if (stompClient !== null && stompClient.connected) {
             stompClient.send("/app/message", {}, JSON.stringify(message));
