@@ -23,7 +23,7 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
             } else {
                 crawlInterval = $interval(function () {
                     navigateToNum(getCurrentNum() + 1)
-                }, 3000);
+                }, 5000);
             }
         };
 
