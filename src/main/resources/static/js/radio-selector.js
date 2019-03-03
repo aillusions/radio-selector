@@ -1,7 +1,7 @@
 /**
  *
  */
-function RadioSelector() {
+function RadioSelector(RADIO_PUB_SUB) {
     var selectedIdx = null;
     var selectedItem = null;
 

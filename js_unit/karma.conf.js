@@ -18,7 +18,12 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            BASE_JS_PATH + "/vendor/pubsub.js",
+
+            BASE_JS_PATH + "/js/radio-player.js",
+            BASE_JS_PATH + "/js/radio-pub-sub.js",
             BASE_JS_PATH + "/js/radio-selector2.js",
+
             "DemoTest.js",
             "RadioSelectorTest.js"
         ],

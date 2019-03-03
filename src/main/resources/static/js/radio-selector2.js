@@ -1,7 +1,7 @@
 /**
  *
  */
-function RadioSelector() {
+function RadioSelector(radioPubSub) {
     var srv = this;
 
     srv.selectedIdx = null;
@@ -12,5 +12,6 @@ function RadioSelector() {
 
     this.setSelectedIdx = function (idx) {
         srv.selectedIdx = idx;
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, [idx]);
     };
 }

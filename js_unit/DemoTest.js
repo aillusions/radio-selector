@@ -9,4 +9,16 @@ describe('DemoTest', function () {
         done();
     });
 
+    it('pub sub test', function (done) {
+
+        pubsub.subscribe('hello-world', function() {
+            console.log('hello world....');
+        });
+
+        //publish event on 'hello/world' namespace
+        pubsub.publish('hello-world');
+
+        done();
+    });
+
 });
