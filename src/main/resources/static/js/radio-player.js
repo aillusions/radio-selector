@@ -6,6 +6,10 @@ function RadioPlayer() {
     var playerInstance;
     var playRequestedButNotYetPlaying = 0;
 
+    this.pauseAudio = function () {
+        playerInstance.pause();
+    };
+
     this.playAudio = function (url) {
 
         var now = Date.now();

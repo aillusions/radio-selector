@@ -54,10 +54,6 @@ function RadioSelector() {
         if (selectedItem == null) {
             selectElement(thisElement);
             playForElement(thisElement);
-        } else if (selectedItem.attr('id') === thisElement.attr('id')) {
-            pauseSelectElement();
-            PLAYER_INSTANCE.pause();
-            console.info("Paused.")
         } else {
             var prevSelected = selectedItem;
             deSelectElement();
