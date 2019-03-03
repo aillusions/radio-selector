@@ -15,7 +15,7 @@ $(function () {
     }
 
     if (SELECTED_IDX) {
-        selectorItemHandler(SELECTED_IDX);
+        RADIO_SELECTOR.selectorItemHandler(SELECTED_IDX);
     }
 });
 

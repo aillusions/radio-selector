@@ -21,7 +21,7 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
             var search = $location.search();
             var idx = search['idx'];
             console.info("idx:" + idx)
-            selectorItemHandler(idx);
+            RADIO_SELECTOR.selectorItemHandler(idx);
         });
 
     }]);
