@@ -27,3 +27,4 @@
 node_modules
 package-lock.json
 *.log
+pom.xml.versionsBackup
