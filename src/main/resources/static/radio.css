@@ -3,8 +3,19 @@ body {
     background-color: lightslategrey
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 audio {
     height: 25px;
+}
+
+button {
+    height: 25px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100px;
 }
 
 .center {

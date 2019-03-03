@@ -15,17 +15,22 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
             }
         });
 
-        var crawlInterval = null;
+        vm.crawlInterval = null;
         vm.onToggleCrawl = function () {
-            if (crawlInterval) {
-                $interval.cancel(crawlInterval);
-                crawlInterval = null;
+            if (vm.crawlInterval) {
+                $interval.cancel(vm.crawlInterval);
+                vm.crawlInterval = null;
             } else {
-                crawlInterval = $interval(function () {
-                    navigateToNum(getCurrentNum() + 1)
+                goToNextNumber();
+                vm.crawlInterval = $interval(function () {
+                    goToNextNumber();
                 }, 5000);
             }
         };
+
+        function goToNextNumber() {
+            navigateToNum(getCurrentNum() + 1);
+        }
 
         function navigateToNum(num) {
             $location.search({"num": num})
