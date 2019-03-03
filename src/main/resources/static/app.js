@@ -5,7 +5,7 @@
 var zws = new Z_WS('/ws/drawing');
 
 
-var numberOfItems = 1260;
+var numberOfItems = 1268;
 var FIELD_CONTAINER = null;
 var SELECTED_ITEM = null;
 var previousItemOver = null;
@@ -18,7 +18,7 @@ $(function () {
         FIELD_CONTAINER.append("<div class='selector_item' id='selector_item_" + i + "'></div>");
     }
 
-    /*$(".selector_item").on('mouseover', function (evt) {
+    $(".selector_item").on('mouseover', function (evt) {
         if (SELECTED_ITEM != null) {
             return;
         }
@@ -33,7 +33,7 @@ $(function () {
         highlightElement(thisItem);
 
         playForElement(thisItem);
-    });*/
+    });
 
     function playForElement(elem) {
         var idx = elem.attr('id').substring(14);
@@ -87,3 +87,4 @@ $(function () {
 function renderPoint(x, y) {
 
 }
+

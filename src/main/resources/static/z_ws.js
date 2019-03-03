@@ -1,7 +1,5 @@
 /**
  *
- * @returns {{sendMessage: _sendMessage}}
- * @constructor
  */
 function Z_WS(wsEndpointUri) {
 
