@@ -2,7 +2,8 @@
 <style>
     body {margin:0.4%; background-color:lightslategrey}
     audio {height: 25px;}
-    .selector {width:100%; cursor:pointer;}
+    .center {text-align: center}
+    .selector {cursor:pointer;}
     .selector_item {
        border-radius:8px;
        height:30px;
@@ -20,15 +21,16 @@
     }
 
     @media(max-width: 1439px) {
-        .selector_item {height:50px;  width:50px;}
+        .selector_item {height:150px;  width:150px;}
     }
 
     @media(max-width: 1023px) {
-        .selector_item {height:70px;  width:70px;}
+        .selector_item {height:250px; width:250px; border-width:2px; border-color:#b7c4d2}
+
     }
 
     @media(max-width: 768px) {
-        .selector_item {height:150px;  width:150px;}
+        .selector_item {height:350px;  width:350px; border-width:3px; border-color:#b7c4d2}
     }
 
 </style>
@@ -46,7 +48,7 @@
 <script src="/js/radioController.js"></script>
 <body ng-app="radio" ng-controller="radioController as rCtrl">
 
-<div id="field_container" class="selector"><!--oncontextmenu="return false;" -->
+<div id="field_container" class="selector center"><!--oncontextmenu="return false;" -->
    <audio id="audioPlayerId"
           src=""
           autobuffer controls autoplay loop>
