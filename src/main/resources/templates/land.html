@@ -6,7 +6,7 @@
 </head>
 <body ng-app="radio" ng-controller="radioController as rCtrl" ng-cloak="">
 
-<div>
+<div class="center">
     <audio id="audioPlayerId" src="" autobuffer controls autoplay loop></audio>
     <button ng-click="rCtrl.onToggleCrawl()">{{rCtrl.crawlInterval?'stop' : 'start'}}</button>
 </div>
