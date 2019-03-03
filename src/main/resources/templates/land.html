@@ -9,6 +9,7 @@
 <div class="center">
     <audio id="audioPlayerId" src="" autobuffer controls autoplay loop></audio>
     <button ng-click="rCtrl.onToggleCrawl()">{{rCtrl.crawlInterval?'stop' : 'start'}}</button>
+    <button ng-click="rCtrl.goToNextNumber()">next</button>
 </div>
 
 <div id="field_container" class="selector center">

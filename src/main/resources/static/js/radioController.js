@@ -21,16 +21,16 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
                 $interval.cancel(vm.crawlInterval);
                 vm.crawlInterval = null;
             } else {
-                goToNextNumber();
+                vm.goToNextNumber();
                 vm.crawlInterval = $interval(function () {
-                    goToNextNumber();
+                    vm.goToNextNumber();
                 }, 5000);
             }
         };
 
-        function goToNextNumber() {
+        vm.goToNextNumber = function () {
             navigateToNum(getCurrentNum() + 1);
-        }
+        };
 
         function navigateToNum(num) {
             $location.search({"num": num})
