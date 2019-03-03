@@ -13,7 +13,7 @@ $(function () {
     var fieldContainer = $('#field_container');
     console.log("ready!");
     for (var i = 0; i < NUMBER_OF_ITEMS; i++) {
-        fieldContainer.append("<a href='#!?idx=" + i + "'><div class='selector_item' id='selector_item_" + i + "'></div></a>");
+        fieldContainer.append("<a href='#!?idx=" + i + "' class='selector_item' id='selector_item_" + i + "'></a>");
     }
 
     RADIO_SELECTOR.onUiBuilt();
