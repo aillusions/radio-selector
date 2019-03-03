@@ -3,12 +3,10 @@
  */
 
 var RADIO_SELECTOR = new RadioSelector();
-var SELECTED_IDX = null;
 
 function RadioSelector() {
-
-    var SELECTED_ITEM = null;
-
+    var selectedIdx = null;
+    var selectedItem = null;
 
     function playForIndex(idx) {
         console.log("idx:" + idx);
@@ -30,36 +28,42 @@ function RadioSelector() {
     }
 
     function selectElement(elem) {
-        SELECTED_ITEM = elem;
-        SELECTED_ITEM.css('background-color', 'green');
+        selectedItem = elem;
+        selectedItem.css('background-color', 'green');
     }
 
     function deSelectElement() {
-        SELECTED_ITEM = null;
+        selectedItem = null;
     }
 
     function pauseSelectElement() {
-        SELECTED_ITEM.css('background-color', 'orange');
+        selectedItem.css('background-color', 'orange');
     }
+
+    this.onUiBuilt = function () {
+        if (selectedIdx) {
+            RADIO_SELECTOR.selectorItemHandler(selectedIdx);
+        }
+    };
 
     this.selectorItemHandler = function (idx) {
 
-        SELECTED_IDX = idx;
+        selectedIdx = idx;
 
         var thisElement = $("#selector_item_" + idx);
         if (!thisElement.length) {
             return
         }
 
-        if (SELECTED_ITEM == null) {
+        if (selectedItem == null) {
             selectElement(thisElement);
             playForElement(thisElement);
-        } else if (SELECTED_ITEM.attr('id') === thisElement.attr('id')) {
+        } else if (selectedItem.attr('id') === thisElement.attr('id')) {
             pauseSelectElement();
             PLAYER_INSTANCE.pause();
             console.info("Paused.")
         } else {
-            var prevSelected = SELECTED_ITEM;
+            var prevSelected = selectedItem;
             deSelectElement();
             unHighlightElement(prevSelected);
             selectElement(thisElement);
