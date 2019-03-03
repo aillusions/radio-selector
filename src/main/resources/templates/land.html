@@ -14,10 +14,13 @@
        border-top-style: solid;
        border-right-style: solid;
        border-left-style: solid;
-    display:inline-block;
-    text-align: center;
-    font-size:2pt;
-    color:red
+       display:inline-block;
+       text-align: center;
+       font-size:2pt;
+       color:red
+    }
+    .selector_item:hover {
+       background-color: #b7c4d287;
     }
 
     @media(max-width: 1439px) {
@@ -26,7 +29,6 @@
 
     @media(max-width: 1023px) {
         .selector_item {height:200px; width:200px; border-width:2px; border-color:#b7c4d2}
-
     }
 
     @media(max-width: 768px) {
@@ -43,6 +45,7 @@
 <script src="/vendor/ngStorage.min.js"></script>
 <script src="/vendor/angular-route.min.js"></script>
 
+<script src="/js/radio-selector.js"></script>
 <script src="/js/z_ws.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/radioController.js"></script>
