@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    background-color: lightslategrey
+}
+
+audio {
+    height: 25px;
+}
+
+.center {
+    text-align: center
+}
+
+.selector {
+}
+
+.selector_item {
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
+    background-color: lightslategrey;
+    border-color: #b7c4d287;
+    border-width: 1px;;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+    display: inline-block;
+    text-align: center;
+    font-size: 2pt;
+    color: red
+}
+
+.selector_item:hover {
+    background-color: #b7c4d287;
+}
+
+.selector_item_playing {
+    background-color: green
+}
+
+.selector_item_playing:hover {
+    background-color: green
+}
+
+.selector_item_paused {
+    background-color: orange
+}
+
+.selector_item_paused:hover {
+    background-color: orange
+}
+
+.selector_item_visited {
+    background-color: gray
+}
+
+@media (min-width: 0px)    and (max-width: 320px) {
+    .selector_item {
+        height: 80px;
+        width: 80px;
+        border-width: 1px;
+    }
+}
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width: 320px)  and (max-width: 481px) {
+    .selector_item {
+        height: 80px;
+        width: 80px;
+        border-width: 1px;
+    }
+}
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width: 481px)  and (max-width: 641px) {
+    .selector_item {
+        height: 80px;
+        width: 80px;
+        border-width: 1px;
+    }
+}
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width: 641px)  and (max-width: 961px) {
+    .selector_item {
+        height: 80px;
+        width: 80px;
+        border-width: 1px;
+    }
+}
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width: 961px)  and (max-width: 1025px) {
+    .selector_item {
+        height: 80px;
+        width: 80px;
+        border-width: 1px;
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width: 1025px) and (max-width: 1281px) {
+    .selector_item {
+        height: 60px;
+        width: 60px;
+        border-width: 1px;
+    }
+}
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width: 1281px) and (max-width: 8000px) {
+    .selector_item {
+        height: 40px;
+        width: 40px;
+        border-width: 1px;
+    }
+}
+
+/* hi-res laptops and desktops */
