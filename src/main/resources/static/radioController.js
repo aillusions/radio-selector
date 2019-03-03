@@ -9,7 +9,5 @@ app.controller('radioController', ['$scope', '$interval', '$http', '$timeout', f
 
     var vm = this;
 
-    debugger
-
 }]);
 
