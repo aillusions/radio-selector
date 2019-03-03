@@ -2,10 +2,18 @@
 
 describe('RadioSelectorTest', function () {
 
-    it('should create RadioSelector', function (done) {
+    it('should change selected index', function (done) {
 
         var radioSelector = new RadioSelector();
-        // debugger
+
+        expect( radioSelector.getSelectedIdx()).toBe(null);
+
+        radioSelector.setSelectedIdx(1);
+        expect(radioSelector.getSelectedIdx()).toBe(1);
+
+        radioSelector.setSelectedIdx(2);
+        expect(radioSelector.getSelectedIdx()).toBe(2);
+
         done();
     });
 
