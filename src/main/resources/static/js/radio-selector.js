@@ -38,7 +38,7 @@ function RadioSelector(RADIO_PUB_SUB) {
 
     this.onUiBuilt = function () {
         if (selectedIdx) {
-            RADIO_SELECTOR.selectorItemHandler(selectedIdx);
+            this.selectorItemHandler(selectedIdx);
         }
     };
 
