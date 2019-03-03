@@ -15,7 +15,7 @@ function Z_WS(wsEndpointUri) {
             stompClient.subscribe('/topic/messages', function (chatMessage) {
 
                 var JSON_ = JSON.parse(chatMessage.body);
-                renderPoint(JSON_["requestedX"], JSON_["requestedY"]);
+                //renderPoint(JSON_["requestedX"], JSON_["requestedY"]);
                 if (JSON_["song"]) {
                     RADIO_PLAYER.playAudio(JSON_["song"]);
                 }

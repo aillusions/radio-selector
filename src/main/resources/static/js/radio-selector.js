@@ -7,7 +7,7 @@ function RadioSelector() {
 
     function playForIndex(idx) {
         console.log("idx:" + idx);
-        zws.sendMessage(idx);
+        RADIO_WEBSOCK.sendMessage(idx);
     }
 
     function playForElement(elem) {
