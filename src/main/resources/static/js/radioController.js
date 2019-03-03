@@ -15,10 +15,16 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
             }
         });
 
+        var crawlInterval = null;
         vm.onToggleCrawl = function () {
-            $interval(function () {
-                navigateToNum(getCurrentNum() + 1)
-            }, 3000);
+            if (crawlInterval) {
+                $interval.cancel(crawlInterval);
+                crawlInterval = null;
+            } else {
+                crawlInterval = $interval(function () {
+                    navigateToNum(getCurrentNum() + 1)
+                }, 3000);
+            }
         };
 
         function navigateToNum(num) {
