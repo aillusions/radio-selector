@@ -1,6 +1,7 @@
 package com.zalizniak.radio;
 
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -8,7 +9,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -27,22 +27,26 @@ public class ScrapUtils {
         return urlBuilder.build().toUri();
     }
 
-    public static BufferedReader getBody(URI targetUrl, String charset) throws MalformedURLException {
+    public static BufferedReader getBody(String targetUrl, String charset) {
         String result = ScrapUtils.getBodyImpl(targetUrl, charset);
 
         return new BufferedReader(new StringReader(result));
     }
 
-    public static String getBodyImpl(URI targetUrl, String charset) throws MalformedURLException {
+    public static String getBodyImpl(String targetUrl, String charset) {
 
         RestTemplate restTemplate = new RestTemplate();
+
+        SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate.getRequestFactory();
+        rf.setReadTimeout(5 * 1000);
+        rf.setConnectTimeout(2 * 1000);
+
         restTemplate.setMessageConverters(ScrapUtils.getHttpMessageConverters(charset));
 
-        String url = targetUrl.toURL().toString();
         ResponseEntity<String> responseEntity = restTemplate.exchange(
-                url,
+                targetUrl,
                 HttpMethod.GET,
-                ScrapUtils.getEntity(url),
+                ScrapUtils.getEntity(targetUrl),
                 String.class);
 
         String result = responseEntity.getBody();

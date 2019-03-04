@@ -33,7 +33,7 @@ public class ScrapInternetRadioCom {
 
         URI url = ScrapUtils.getTargetUrl("https://www.internet-radio.com", uri, params);
 
-        BufferedReader br = ScrapUtils.getBody(url, "UTF-8");
+        BufferedReader br = ScrapUtils.getBody(url.toURL().toString(), "UTF-8");
 
         String readLine;
         while ((readLine = br.readLine()) != null) {
