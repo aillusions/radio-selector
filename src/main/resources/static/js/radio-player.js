@@ -8,7 +8,7 @@ function RadioPlayer(radioPubSub) {
     var playRequestedButNotYetPlaying = 0;
 
     radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
-        RADIO_WEBSOCK.sendMessage(idx);
+        RADIO_WEBSOCK.issueGetRecordingByIdx(idx);
     });
 
     radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, function () {

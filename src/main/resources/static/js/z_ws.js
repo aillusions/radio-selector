@@ -39,23 +39,18 @@ function Z_WS(wsEndpointUri) {
         console.log("Disconnected");
     }
 
-    function sendMessage(idx) {
-        if (!stompClient.connected) {
-            setTimeout(function () {
-                sendMessage(idx)
-            }, 50);
-            return;
-        }
+    function issueGetRecordingByIdx(idx) {
 
         var StationIdxInboundMsg = {
             stationIdx: idx
         };
+
         if (stompClient !== null && stompClient.connected) {
             sendStationIdxInboundMsg(StationIdxInboundMsg);
         } else {
-            connectZws(function () {
-                sendStationIdxInboundMsg(StationIdxInboundMsg);
-            });
+            setTimeout(function () {
+                issueGetRecordingByIdx(idx)
+            }, 50);
         }
     }
 
@@ -65,6 +60,6 @@ function Z_WS(wsEndpointUri) {
 
     connectZws();
     return {
-        sendMessage: sendMessage
+        issueGetRecordingByIdx: issueGetRecordingByIdx
     }
 }
