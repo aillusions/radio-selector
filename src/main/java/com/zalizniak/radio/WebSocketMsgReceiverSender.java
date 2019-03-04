@@ -5,6 +5,7 @@ import com.zalizniak.radio.config.ApplicationProperties;
 import com.zalizniak.radio.model.PlayBackInboundMsg;
 import com.zalizniak.radio.model.StationIdxInboundMsg;
 import com.zalizniak.radio.model.WebSocketOutboundMsg;
+import com.zalizniak.radio.redis.PopularStationRedisDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,6 +25,9 @@ public class WebSocketMsgReceiverSender {
     @Autowired
     private SimpMessagingTemplate template;
 
+    @Autowired
+    private PopularStationRedisDao popularStationRedisDao;
+
     @MessageMapping("/station-by-idx-dest")
     public void onStationIdxInboundMsg(StationIdxInboundMsg inboundMsg) {
         log.debug("Message : {}", inboundMsg);
@@ -37,6 +41,7 @@ public class WebSocketMsgReceiverSender {
 
     @MessageMapping("/station-playing-dest")
     public void onPlayBackInboundMsg(PlayBackInboundMsg inboundMsg) {
+        popularStationRedisDao.registerPlayback(inboundMsg.getStationUrl(), inboundMsg.getListeningPeriodMs());
         log.info("Message : {}", inboundMsg);
     }
 
