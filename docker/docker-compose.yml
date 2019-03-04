@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  # docker run -it --link radio-redis-srv:redis --network=radio-network --rm redis:5.0.1 redis-cli -h redis -p 6379
+  radio-redis:
+    image: redis:5.0.3
+    container_name: radio-redis-srv
+    ports:
+    - 6379:6379
+    volumes:
+    - radio_redis_data:/data
+    networks:
+    - radio-network
+
+  # https://joeferner.github.io/redis-commander/
+  # http://localhost:8081
+  radio-redis-commander:
+    container_name: radio-redis-commander-srv
+    hostname: radio-redis-commander-srv
+    image: rediscommander/redis-commander:latest
+    depends_on:
+    - radio-redis
+    environment:
+    - REDIS_HOSTS=local-redis:radio-redis-srv:6379
+    ports:
+    - "8081:8081"
+    networks:
+    - radio-network
+
+networks:
+  radio-network:
+    name: radio-network
+
+volumes:
+  radio_redis_data:
+    name: radio_redis_data
