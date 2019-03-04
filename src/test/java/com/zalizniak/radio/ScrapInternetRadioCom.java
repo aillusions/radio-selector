@@ -24,10 +24,10 @@ import java.util.List;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RadioSelectorApplicationTests {
+public class ScrapInternetRadioCom {
 
     @Test
-    public void contextLoads() throws IOException, InterruptedException {
+    public void contextLoads() throws IOException {
 
         String basic = "/search/";
         run(basic, "ukraine");
