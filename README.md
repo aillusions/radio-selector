@@ -1,5 +1,5 @@
 
-mvn versions:set -DnewVersion=0.0.11-SNAPSHOT
-mvn package
+mvn versions:set -DnewVersion=0.0.12-SNAPSHOT
+mvn clean package
 
 -Dspring.profiles.active=prod
