@@ -14,7 +14,7 @@ public class ScrapRadiobit50websCom {
     public void run() throws IOException {
 
         URI url = ScrapUtils.getTargetUrl("http://radiobit.50webs.com", "/", null);
-        BufferedReader br = ScrapUtils.getBody(url);
+        BufferedReader br = ScrapUtils.getBody(url, "UTF-16LE");
 
         String readLine;
         while ((readLine = br.readLine()) != null) {
@@ -22,7 +22,8 @@ public class ScrapRadiobit50websCom {
             if (StringUtils.containsIgnoreCase(readLine.trim(), ".m3u")
                     || StringUtils.containsIgnoreCase(readLine.trim(), ".pls")) {
 
-                System.out.println(readLine);
+                String specUrl = StringUtils.substringBetween(readLine, "href=", ">");
+                System.out.println(specUrl);
             }
         }
     }

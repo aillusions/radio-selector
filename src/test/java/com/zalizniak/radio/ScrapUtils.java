@@ -27,16 +27,16 @@ public class ScrapUtils {
         return urlBuilder.build().toUri();
     }
 
-    public static BufferedReader getBody(URI targetUrl) throws MalformedURLException {
-        String result = ScrapUtils.getBodyImpl(targetUrl);
+    public static BufferedReader getBody(URI targetUrl, String charset) throws MalformedURLException {
+        String result = ScrapUtils.getBodyImpl(targetUrl, charset);
 
         return new BufferedReader(new StringReader(result));
     }
 
-    public static String getBodyImpl(URI targetUrl) throws MalformedURLException {
+    public static String getBodyImpl(URI targetUrl, String charset) throws MalformedURLException {
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setMessageConverters(ScrapUtils.getHttpMessageConverters());
+        restTemplate.setMessageConverters(ScrapUtils.getHttpMessageConverters(charset));
 
         String url = targetUrl.toURL().toString();
         ResponseEntity<String> responseEntity = restTemplate.exchange(
@@ -65,16 +65,15 @@ public class ScrapUtils {
         headers.set("Host", referrer);
         headers.set("Pragma", "no-cache");
         headers.set("Referer", referrer);
-        headers.set("Upgrade-Insecure-Requests", "1");
+        //headers.set("Upgrade-Insecure-Requests", "1");
         headers.set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36");
-
 
         return headers;
     }
 
-    public static List<HttpMessageConverter<?>> getHttpMessageConverters() {
+    public static List<HttpMessageConverter<?>> getHttpMessageConverters(String charSet) {
 
-        HttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        HttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName(charSet));
         List<HttpMessageConverter<?>> httpMessageConverters = new ArrayList<>();
         httpMessageConverters.add(stringHttpMessageConverter);
         return httpMessageConverters;
