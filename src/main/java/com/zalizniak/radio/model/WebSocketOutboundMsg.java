@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class WebSocketOutboundMsg {
 
     private long requestedX;
-    private long requestedY;
     private String song = "";
 }

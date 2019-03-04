@@ -39,23 +39,22 @@ function Z_WS(wsEndpointUri) {
         console.log("Disconnected");
     }
 
-    function sendMessage(x) {
+    function sendMessage(idx) {
         if (!stompClient.connected) {
             setTimeout(function () {
-                sendMessage(x)
+                sendMessage(idx)
             }, 50);
             return;
         }
 
-        var message = {
-            x: x,
-            y: 0
+        var StationIdxInboundMsg = {
+            stationIdx: idx
         };
         if (stompClient !== null && stompClient.connected) {
-            stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(message));
+            stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
         } else {
             connectZws(function () {
-                stompClient.send("/app/station-by-idx-dest", {}, message);
+                stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
             });
         }
     }

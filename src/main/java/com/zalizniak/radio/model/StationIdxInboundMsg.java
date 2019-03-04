@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WebSocketInboundMsg {
-    private long x;
-    private long y;
+public class StationIdxInboundMsg {
+    private long stationIdx;
 }

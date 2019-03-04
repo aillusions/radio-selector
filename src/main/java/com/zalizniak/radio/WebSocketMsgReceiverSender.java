@@ -2,7 +2,7 @@ package com.zalizniak.radio;
 
 
 import com.zalizniak.radio.config.ApplicationProperties;
-import com.zalizniak.radio.model.WebSocketInboundMsg;
+import com.zalizniak.radio.model.StationIdxInboundMsg;
 import com.zalizniak.radio.model.WebSocketOutboundMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ public class WebSocketMsgReceiverSender {
     private SimpMessagingTemplate template;
 
     @MessageMapping("/station-by-idx-dest")
-    public void onWsMessageReceived(WebSocketInboundMsg inboundMsg) {
+    public void onWebSocketInboundMsg(StationIdxInboundMsg inboundMsg) {
         log.debug("Received WebSocket Message : {}", inboundMsg);
 
-        long idx = inboundMsg.getX();
+        long idx = inboundMsg.getStationIdx();
         String url = knowUrlsProvider.get(idx);
         log.info("Sending: " + url + " with index: " + idx);
 
-        doSendWsMessage(new WebSocketOutboundMsg(inboundMsg.getX(), inboundMsg.getY(), url));
+        doSendWsMessage(new WebSocketOutboundMsg(inboundMsg.getStationIdx(), url));
     }
 
     public void doSendWsMessage(WebSocketOutboundMsg message) {
