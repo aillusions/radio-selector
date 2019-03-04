@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,12 +31,12 @@ public class ScrapInternetRadioCom {
             params.put("radio", query);
         }
 
-        String result = ScrapUtils.getBody(ScrapUtils.getTargetUrl("https://www.internet-radio.com", uri, params));
+        URI url = ScrapUtils.getTargetUrl("https://www.internet-radio.com", uri, params);
 
-        BufferedReader b = new BufferedReader(new StringReader(result));
+        BufferedReader br = ScrapUtils.getBody(url);
 
         String readLine;
-        while ((readLine = b.readLine()) != null) {
+        while ((readLine = br.readLine()) != null) {
 
             if (StringUtils.startsWith(readLine.trim(), "mp3:")
                     || StringUtils.startsWith(readLine.trim(), "m4a:")) {
