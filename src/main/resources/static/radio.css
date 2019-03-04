@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background-color: lightslategrey
+    background-color: lightslategrey;
+    padding-top:35px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -9,6 +10,7 @@ body {
 
 audio {
     height: 25px;
+    vertical-align: bottom;
 }
 
 button {
@@ -23,6 +25,19 @@ button {
 }
 
 .selector {
+
+}
+
+#top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 25px;
+    background-color: lightslategrey;
+    border: solid;
+    border-width: 1px;
 }
 
 .selector_item {
@@ -78,7 +93,7 @@ button {
     .selector_item {
         height: 80px;
         width: 80px;
-        border-width: 1px;
+        border-width: 5px;
     }
 }
 
