@@ -54,12 +54,32 @@ function Z_WS(wsEndpointUri) {
         }
     }
 
+    function issueReportPlayback(url, time) {
+        var PlayBackInboundMsg = {
+            stationUrl: url,
+            listeningPeriodMs: time
+        };
+
+        if (stompClient !== null && stompClient.connected) {
+            sendPlayBackInboundMsg(PlayBackInboundMsg);
+        } else {
+            setTimeout(function () {
+                issueReportPlayback(url, time)
+            }, 50);
+        }
+    }
+
     function sendStationIdxInboundMsg(StationIdxInboundMsg) {
         stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
     }
 
+    function sendPlayBackInboundMsg(PlayBackInboundMsg) {
+        stompClient.send("/app/station-playing-dest", {}, JSON.stringify(PlayBackInboundMsg));
+    }
+
     connectZws();
     return {
-        issueGetRecordingByIdx: issueGetRecordingByIdx
+        issueGetRecordingByIdx: issueGetRecordingByIdx,
+        issueReportPlayback: issueReportPlayback
     }
 }

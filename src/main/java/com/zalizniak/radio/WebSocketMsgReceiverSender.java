@@ -26,7 +26,7 @@ public class WebSocketMsgReceiverSender {
 
     @MessageMapping("/station-by-idx-dest")
     public void onStationIdxInboundMsg(StationIdxInboundMsg inboundMsg) {
-        log.debug("Received WebSocket Message : {}", inboundMsg);
+        log.debug("Message : {}", inboundMsg);
 
         long idx = inboundMsg.getStationIdx();
         String url = knowUrlsProvider.get(idx);
@@ -37,7 +37,7 @@ public class WebSocketMsgReceiverSender {
 
     @MessageMapping("/station-playing-dest")
     public void onPlayBackInboundMsg(PlayBackInboundMsg inboundMsg) {
-        log.debug("Received WebSocket Message : {}", inboundMsg);
+        log.info("Message : {}", inboundMsg);
     }
 
     public void doSendWsMessage(WebSocketOutboundMsg message) {
