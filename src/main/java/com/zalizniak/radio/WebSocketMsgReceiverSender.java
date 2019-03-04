@@ -2,6 +2,7 @@ package com.zalizniak.radio;
 
 
 import com.zalizniak.radio.config.ApplicationProperties;
+import com.zalizniak.radio.model.PlayBackInboundMsg;
 import com.zalizniak.radio.model.StationIdxInboundMsg;
 import com.zalizniak.radio.model.WebSocketOutboundMsg;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ public class WebSocketMsgReceiverSender {
     private SimpMessagingTemplate template;
 
     @MessageMapping("/station-by-idx-dest")
-    public void onWebSocketInboundMsg(StationIdxInboundMsg inboundMsg) {
+    public void onStationIdxInboundMsg(StationIdxInboundMsg inboundMsg) {
         log.debug("Received WebSocket Message : {}", inboundMsg);
 
         long idx = inboundMsg.getStationIdx();
@@ -32,6 +33,11 @@ public class WebSocketMsgReceiverSender {
         log.info("Sending: " + url + " with index: " + idx);
 
         doSendWsMessage(new WebSocketOutboundMsg(inboundMsg.getStationIdx(), url));
+    }
+
+    @MessageMapping("/station-playing-dest")
+    public void onPlayBackInboundMsg(PlayBackInboundMsg inboundMsg) {
+        log.debug("Received WebSocket Message : {}", inboundMsg);
     }
 
     public void doSendWsMessage(WebSocketOutboundMsg message) {

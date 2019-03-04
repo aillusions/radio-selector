@@ -51,12 +51,16 @@ function Z_WS(wsEndpointUri) {
             stationIdx: idx
         };
         if (stompClient !== null && stompClient.connected) {
-            stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
+            sendStationIdxInboundMsg(StationIdxInboundMsg);
         } else {
             connectZws(function () {
-                stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
+                sendStationIdxInboundMsg(StationIdxInboundMsg);
             });
         }
+    }
+
+    function sendStationIdxInboundMsg(StationIdxInboundMsg) {
+        stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(StationIdxInboundMsg));
     }
 
     connectZws();
