@@ -23,8 +23,7 @@ public class WebSocketMsgReceiverSender {
     @Autowired
     private SimpMessagingTemplate template;
 
-
-    @MessageMapping("/message")
+    @MessageMapping("/station-by-idx-dest")
     public void onWsMessageReceived(WebSocketInboundMsg inboundMsg) {
         log.debug("Received WebSocket Message : {}", inboundMsg);
 

@@ -52,10 +52,10 @@ function Z_WS(wsEndpointUri) {
             y: 0
         };
         if (stompClient !== null && stompClient.connected) {
-            stompClient.send("/app/message", {}, JSON.stringify(message));
+            stompClient.send("/app/station-by-idx-dest", {}, JSON.stringify(message));
         } else {
             connectZws(function () {
-                stompClient.send("/app/message", {}, message);
+                stompClient.send("/app/station-by-idx-dest", {}, message);
             });
         }
     }
