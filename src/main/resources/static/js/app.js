@@ -2,7 +2,7 @@
  *
  */
 
-var NUMBER_OF_ITEMS = 1268;
+var NUMBER_OF_ITEMS = 1691;
 
 var RADIO_PUB_SUB = new RadioPubSub();
 var RADIO_WEBSOCK = new Z_WS('/ws/drawing');

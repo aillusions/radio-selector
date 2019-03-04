@@ -24,7 +24,7 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
                 vm.goToNextNumber();
                 vm.crawlInterval = $interval(function () {
                     vm.goToNextNumber();
-                }, 5000);
+                }, 6000);
             }
         };
 
