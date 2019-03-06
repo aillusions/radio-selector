@@ -1,7 +1,7 @@
 /**
  *
  */
-function Z_WS(wsEndpointUri) {
+function Z_WS(wsEndpointUri, radioPubSub) {
 
     var stompClient;
     var counter = 0;
@@ -33,7 +33,8 @@ function Z_WS(wsEndpointUri) {
 
         var WebSocketOutboundMsg = JSON.parse(webSocketMessage.body);
         if (WebSocketOutboundMsg["radioStreamUrl"]) {
-            AUDIO_ADAPTER.playAudio(WebSocketOutboundMsg["radioStreamUrl"]);
+            var streamUrl = WebSocketOutboundMsg["radioStreamUrl"];
+            radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_STREAM_URL_RECEIVED, [streamUrl]);
         }
         counter++;
         console.log("counter: " + counter);

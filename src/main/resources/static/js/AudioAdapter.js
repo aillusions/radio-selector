@@ -21,8 +21,7 @@ function AudioAdapter(radioPubSub, audioElement) {
 
         var now = Date.now();
 
-        if (playRequestedButNotYetPlaying
-            && ((now - playRequestedButNotYetPlaying) < 10)) {
+        if (playRequestedButNotYetPlaying && ((now - playRequestedButNotYetPlaying) < 10)) {
             console.info("playRequestedButNotYetPlaying");
             return;
         }

@@ -4,23 +4,31 @@
 
 var NUMBER_OF_ITEMS = 1691;
 
-
 var audioElement = document.getElementById('audioPlayerId');
 audioElement.volume = 0.3;
 
-var RADIO_PUB_SUB = new RadioPubSub();
-var RADIO_WEBSOCK = new Z_WS('/ws/drawing');
-var RADIO_SELECTOR = new RadioSelector(RADIO_PUB_SUB, NUMBER_OF_ITEMS);
-var AUDIO_ADAPTER = new AudioAdapter(RADIO_PUB_SUB, audioElement);
-var LISTENING_STATS = new ListeningStats(RADIO_PUB_SUB, audioElement);
+var radioPubSub = new RadioPubSub();
+var radioWebSock = new Z_WS('/ws/drawing', radioPubSub);
+var RADIO_SELECTOR = new RadioSelector(radioPubSub, NUMBER_OF_ITEMS);
+var audioAdapter = new AudioAdapter(radioPubSub, audioElement);
+
+radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
+    radioWebSock.issueGetRecordingByIdx(idx);
+});
+
+radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SET_TO_PAUSE, function (idx) {
+    audioAdapter.pauseAudio(idx);
+});
+
+radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_STREAM_URL_RECEIVED, function (url) {
+    audioAdapter.playAudio(url);
+});
+
+setInterval(function () {
+    if (audioAdapter.playingStreamUrl) {
+        radioWebSock.issueReportPlayback(audioAdapter.playingStreamUrl, 1000);
+        console.info("Listening stats reported.")
+    }
+}, 1000);
 
 var app = angular.module('radio', ['ngStorage', 'ngRoute']);
-
-
-RADIO_PUB_SUB.getPubSub().subscribe(RADIO_PUB_SUB.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
-    RADIO_WEBSOCK.issueGetRecordingByIdx(idx);
-});
-
-RADIO_PUB_SUB.getPubSub().subscribe(RADIO_PUB_SUB.pubSubEvents.EVT_RADIO_SET_TO_PAUSE, function (idx) {
-    AUDIO_ADAPTER.pauseAudio(idx);
-});
