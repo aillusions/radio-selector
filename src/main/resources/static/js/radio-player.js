@@ -1,10 +1,9 @@
 /**
  *
  */
-function RadioPlayer(radioPubSub) {
+function RadioPlayer(radioPubSub, audioElement) {
     var srv = this;
 
-    var playerInstance;
     var playRequestedButNotYetPlaying = 0;
 
     radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
@@ -22,7 +21,7 @@ function RadioPlayer(radioPubSub) {
     }, 1000);
 
     srv.pauseAudio = function () {
-        playerInstance.pause();
+        audioElement.pause();
         playingUrl = null;
     };
 
@@ -37,16 +36,11 @@ function RadioPlayer(radioPubSub) {
             return;
         }
 
-        if (!playerInstance) {
-            playerInstance = document.getElementById('audioPlayerId');
-            playerInstance.volume = 0.3;
-        }
-
-        playerInstance.src = url;
+        audioElement.src = url;
 
         playRequestedButNotYetPlaying = now;
 
-        var promise = playerInstance.play();
+        var promise = audioElement.play();
         promise.then(function () {
             playingUrl = url;
             console.info('playing..');
