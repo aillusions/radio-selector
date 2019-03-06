@@ -14,18 +14,12 @@ function AudioAdapter(radioPubSub, audioElement) {
         srv.pauseAudio();
     });
 
-    setInterval(function () {
-        if (playingUrl) {
-            RADIO_WEBSOCK.issueReportPlayback(playingUrl, 1000);
-        }
-    }, 1000);
-
     srv.pauseAudio = function () {
         audioElement.pause();
-        playingUrl = null;
+        srv.playingStreamUrl = null;
     };
 
-    var playingUrl = null;
+    srv.playingStreamUrl = null;
     srv.playAudio = function (url) {
 
         var now = Date.now();
@@ -42,7 +36,7 @@ function AudioAdapter(radioPubSub, audioElement) {
 
         var promise = audioElement.play();
         promise.then(function () {
-            playingUrl = url;
+            srv.playingStreamUrl = url;
             console.info('playing..');
             playRequestedButNotYetPlaying = 0;
         }, function (reason) {

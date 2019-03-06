@@ -7,7 +7,7 @@
 <body ng-app="radio" ng-controller="radioController as rCtrl" ng-cloak="">
 
 <div id="top" class="center">
-    <audio id="audioPlayerId" src="" autobuffer controls autoplay loop></audio>
+    <audio id="audioPlayerId" src="audio/welcome.mp3" autobuffer controls autoplay></audio>
     <button ng-click="rCtrl.onToggleCrawl()">{{rCtrl.crawlInterval?'stop' : 'walk'}}</button>
     <button ng-click="rCtrl.goToNextNumber()">next</button>
 </div>
@@ -33,6 +33,7 @@
 <script src="/js/radio-pub-sub.js"></script>
 <script src="/js/radio-selector.js"></script>
 <script src="/js/AudioAdapter.js"></script>
+<script src="/js/ListeningStats.js"></script>
 <script src="/js/z_ws.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/radioController.js"></script>

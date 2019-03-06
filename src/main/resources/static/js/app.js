@@ -12,5 +12,6 @@ var RADIO_PUB_SUB = new RadioPubSub();
 var RADIO_WEBSOCK = new Z_WS('/ws/drawing');
 var RADIO_SELECTOR = new RadioSelector(RADIO_PUB_SUB, NUMBER_OF_ITEMS);
 var AUDIO_ADAPTER = new AudioAdapter(RADIO_PUB_SUB, audioElement);
+var LISTENING_STATS = new ListeningStats(RADIO_PUB_SUB, audioElement);
 
 var app = angular.module('radio', ['ngStorage', 'ngRoute']);
