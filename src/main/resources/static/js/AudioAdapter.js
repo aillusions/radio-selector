@@ -13,7 +13,7 @@ function AudioAdapter(radioPubSub, audioElement) {
 
         audioElement.pause();
         srv.playingStreamUrl = null;
-        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, []);
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_PLAYBACK_PAUSED, []);
     };
 
     srv.playingStreamUrl = null;
@@ -36,7 +36,7 @@ function AudioAdapter(radioPubSub, audioElement) {
             srv.playingStreamUrl = url;
             console.info('playing..');
             playRequestedButNotYetPlaying = 0;
-            radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, []);
+            radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_PLAYBACK_STARTED, []);
         }, function (reason) {
             console.error(reason);
         })

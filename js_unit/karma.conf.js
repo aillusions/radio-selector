@@ -22,7 +22,7 @@ module.exports = function (config) {
 
             BASE_JS_PATH + "/js/AudioAdapter.js",
             BASE_JS_PATH + "/js/radio-pub-sub.js",
-            BASE_JS_PATH + "/js/radio-selector.js",
+            BASE_JS_PATH + "/js/RadioSelector.js",
 
             "tests/DemoTest.js",
             "tests/RadioSelectorTest.js"

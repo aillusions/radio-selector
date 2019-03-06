@@ -25,7 +25,7 @@ function RadioSelector(radioPubSub, itemsNum) {
     srv.setPausedNumber = function (num) {
         var idx = num - 1;
         srv.availableItems[idx].stationStatus = srv.stationStatuses.PAUSED;
-        AUDIO_ADAPTER.pauseAudio();
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SET_TO_PAUSE, [idx]);
     };
 
     srv.setSelectedNumber = function (num) {
@@ -44,7 +44,7 @@ function RadioSelector(radioPubSub, itemsNum) {
         srv.selectedIdx = idx;
         srv.availableItems[idx].stationStatus = srv.stationStatuses.PLAYING;
 
-        RADIO_WEBSOCK.issueGetRecordingByIdx(idx);
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, [idx]);
     };
 
     for (let i = 0; i < itemsNum; i++) {
