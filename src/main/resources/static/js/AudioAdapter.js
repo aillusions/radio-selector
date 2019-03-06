@@ -6,17 +6,14 @@ function AudioAdapter(radioPubSub, audioElement) {
 
     var playRequestedButNotYetPlaying = 0;
 
-    radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
-        RADIO_WEBSOCK.issueGetRecordingByIdx(idx);
-    });
-
-    radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, function () {
-        srv.pauseAudio();
-    });
-
     srv.pauseAudio = function () {
+        if (!srv.playingStreamUrl) {
+            return;
+        }
+
         audioElement.pause();
         srv.playingStreamUrl = null;
+        radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_PAUSED, []);
     };
 
     srv.playingStreamUrl = null;
@@ -39,6 +36,7 @@ function AudioAdapter(radioPubSub, audioElement) {
             srv.playingStreamUrl = url;
             console.info('playing..');
             playRequestedButNotYetPlaying = 0;
+            radioPubSub.getPubSub().publish(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, []);
         }, function (reason) {
             console.error(reason);
         })
