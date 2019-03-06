@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class WebSocketOutboundMsg {
 
     private long requestedX;
-    private String song = "";
+    private String radioStreamUrl = "";
 }

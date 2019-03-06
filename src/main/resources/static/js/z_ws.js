@@ -12,17 +12,7 @@ function Z_WS(wsEndpointUri) {
         stompClient.debug = null;
         stompClient.connect({}, function (frame) {
             console.log("stompClient connected.");
-            stompClient.subscribe('/topic/messages', function (chatMessage) {
-
-                var JSON_ = JSON.parse(chatMessage.body);
-                //renderPoint(JSON_["requestedX"], JSON_["requestedY"]);
-                if (JSON_["song"]) {
-                    RADIO_PLAYER.playAudio(JSON_["song"]);
-                }
-                counter++;
-                console.log("counter: " + counter);
-                console.log("song: " + JSON_["song"]);
-            });
+            stompClient.subscribe('/topic/messages', onStationDataReceived);
         }, function (message) {
             disconnect();
             console.log("stompClient unable to connect: " + message);
@@ -39,6 +29,16 @@ function Z_WS(wsEndpointUri) {
         console.log("Disconnected");
     }
 
+    function onStationDataReceived(webSocketMessage) {
+
+        var WebSocketOutboundMsg = JSON.parse(webSocketMessage.body);
+        if (WebSocketOutboundMsg["radioStreamUrl"]) {
+            RADIO_PLAYER.playAudio(WebSocketOutboundMsg["radioStreamUrl"]);
+        }
+        counter++;
+        console.log("counter: " + counter);
+        console.log("radioStreamUrl: " + WebSocketOutboundMsg["radioStreamUrl"]);
+    }
     function issueGetRecordingByIdx(idx) {
 
         var StationIdxInboundMsg = {
