@@ -6,7 +6,7 @@ app.controller('radioController', ['$scope', '$rootScope', '$interval', '$http',
 
         var vm = this;
 
-        vm.availableStations = NUMBER_OF_ITEMS;
+        vm.availableStations = RADIO_SELECTOR.availableItems;
 
         $scope.$on("$locationChangeSuccess", function ($event, next, current) {
             var num = getCurrentNum();

@@ -10,7 +10,7 @@ audioElement.volume = 0.3;
 var radioPubSub = new RadioPubSub();
 var RADIO_SELECTOR = new RadioSelector(radioPubSub, NUMBER_OF_ITEMS);
 var audioAdapter = new AudioAdapter(radioPubSub, audioElement);
-var radioWebSock = new Z_WS('/ws/drawing', radioPubSub);
+var radioWebSock = new WebSocketAdapter('/ws/drawing', radioPubSub);
 
 radioPubSub.getPubSub().subscribe(radioPubSub.pubSubEvents.EVT_RADIO_SELECTED, function (idx) {
     radioWebSock.issueGetRecordingByIdx(idx);

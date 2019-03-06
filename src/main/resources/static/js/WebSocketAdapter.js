@@ -1,7 +1,7 @@
 /**
  *
  */
-function Z_WS(wsEndpointUri, radioPubSub) {
+function WebSocketAdapter(wsEndpointUri, radioPubSub) {
 
     var stompClient;
     var counter = 0;
