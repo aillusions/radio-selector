@@ -33,7 +33,7 @@ function Z_WS(wsEndpointUri) {
 
         var WebSocketOutboundMsg = JSON.parse(webSocketMessage.body);
         if (WebSocketOutboundMsg["radioStreamUrl"]) {
-            RADIO_PLAYER.playAudio(WebSocketOutboundMsg["radioStreamUrl"]);
+            AUDIO_ADAPTER.playAudio(WebSocketOutboundMsg["radioStreamUrl"]);
         }
         counter++;
         console.log("counter: " + counter);

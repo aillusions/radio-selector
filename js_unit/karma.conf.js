@@ -20,7 +20,7 @@ module.exports = function (config) {
         files: [
             BASE_JS_PATH + "/vendor/pubsub.js",
 
-            BASE_JS_PATH + "/js/radio-player.js",
+            BASE_JS_PATH + "/js/AudioAdapter.js",
             BASE_JS_PATH + "/js/radio-pub-sub.js",
             BASE_JS_PATH + "/js/radio-selector.js",
 

@@ -1,7 +1,7 @@
 /**
  *
  */
-function RadioPlayer(radioPubSub, audioElement) {
+function AudioAdapter(radioPubSub, audioElement) {
     var srv = this;
 
     var playRequestedButNotYetPlaying = 0;
