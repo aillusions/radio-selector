@@ -4,3 +4,5 @@ mvn clean package
 
 -Dspring.profiles.active=prod
 SPRING_PROFILES_ACTIVE=prod
+
+https://zalizniak.com
